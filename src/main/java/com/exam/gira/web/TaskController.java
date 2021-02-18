@@ -1,6 +1,7 @@
 package com.exam.gira.web;
 
 import com.exam.gira.model.binding.TaskAddBindingModel;
+import com.exam.gira.model.service.TaskServiceModel;
 import com.exam.gira.service.TaskService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

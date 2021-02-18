@@ -56,7 +56,6 @@ public class Task extends BaseEntity {
         this.dueDate = dueDate;
     }
 
-    @Column(nullable = false)
     @ManyToOne(optional=false)
     public Classification getClassification() {
         return classification;
@@ -66,7 +65,6 @@ public class Task extends BaseEntity {
         this.classification = classification;
     }
 
-    @Column(nullable = false)
     @ManyToOne(optional=false)
     public User getUser() {
         return user;

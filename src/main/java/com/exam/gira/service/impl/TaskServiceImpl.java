@@ -57,4 +57,28 @@ public class TaskServiceImpl implements TaskService {
                 })
                 .collect(Collectors.toUnmodifiableList());
     }
+
+    @Override
+    public void updateTask(Long id) {
+        Task task = this.taskRepository.findById(id).orElse(null);
+        if (task != null) {
+            String progress = task.getProgress().name();
+
+            switch (progress) {
+                case "OPEN":
+                    task.setProgress(Progress.IN_PROGRESS);
+                    break;
+                case "IN_PROGRESS":
+                    task.setProgress(Progress.COMPLETED);
+                    break;
+                case "COMPLETED":
+                    this.taskRepository.delete(task);
+                    return;
+            }
+
+            this.taskRepository.save(task);
+        }
+
+
+    }
 }

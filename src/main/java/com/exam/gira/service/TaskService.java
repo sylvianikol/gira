@@ -9,4 +9,6 @@ public interface TaskService {
     boolean add(TaskServiceModel taskServiceModel, Long user);
 
     List<TaskServiceModel> getAllTasks();
+
+    void updateTask(Long id);
 }

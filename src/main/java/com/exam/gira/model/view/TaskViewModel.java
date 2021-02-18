@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 public class TaskViewModel {
 
+    private Long id;
     private String name;
     private String userName;
     private ClassificationName classification;
@@ -14,6 +15,14 @@ public class TaskViewModel {
     private Progress progress;
 
     public TaskViewModel() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

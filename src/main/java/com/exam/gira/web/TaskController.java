@@ -6,10 +6,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/tasks")
@@ -37,5 +41,30 @@ public class TaskController {
         }
 
         return "add-task";
+    }
+
+    @PostMapping("/add")
+    public String addConfirm(@Valid TaskAddBindingModel taskAddBindingModel,
+                             BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("taskAddBindingModel", taskAddBindingModel);
+            redirectAttributes.addFlashAttribute(
+                    "org.springframework.validation.BindingResult.taskAddBindingModel",
+                    bindingResult);
+
+            return "redirect:add";
+        }
+
+        boolean isAdded = this.taskService.add(this.modelMapper.map(taskAddBindingModel, TaskServiceModel.class));
+
+        if (!isAdded) {
+            redirectAttributes.addFlashAttribute("taskAddBindingModel", taskAddBindingModel);
+            redirectAttributes.addFlashAttribute("exists", true);
+
+            return "redirect:add";
+        }
+
+        return "redirect:/";
     }
 }

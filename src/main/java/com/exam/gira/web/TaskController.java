@@ -2,6 +2,7 @@ package com.exam.gira.web;
 
 import com.exam.gira.model.binding.TaskAddBindingModel;
 import com.exam.gira.model.service.TaskServiceModel;
+import com.exam.gira.model.service.UserServiceModel;
 import com.exam.gira.service.TaskService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,9 @@ public class TaskController {
     @PostMapping("/add")
     public String addConfirm(@Valid TaskAddBindingModel taskAddBindingModel,
                              BindingResult bindingResult,
-                             RedirectAttributes redirectAttributes) {
+                             RedirectAttributes redirectAttributes,
+                             HttpSession httpSession) {
+        System.out.println();
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("taskAddBindingModel", taskAddBindingModel);
             redirectAttributes.addFlashAttribute(
@@ -56,8 +59,10 @@ public class TaskController {
 
             return "redirect:add";
         }
-
-        boolean isAdded = this.taskService.add(this.modelMapper.map(taskAddBindingModel, TaskServiceModel.class));
+        Object user = httpSession.getAttribute("user");
+        boolean isAdded = this.taskService.add(
+                this.modelMapper.map(taskAddBindingModel, TaskServiceModel.class),
+                ((UserServiceModel) httpSession.getAttribute("user")).getId());
 
         if (!isAdded) {
             redirectAttributes.addFlashAttribute("taskAddBindingModel", taskAddBindingModel);

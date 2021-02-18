@@ -1,6 +1,7 @@
 package com.exam.gira.model.binding;
 
 import com.exam.gira.model.enums.ClassificaionName;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
@@ -39,6 +40,7 @@ public class TaskAddBindingModel {
     }
 
     @NotNull(message = "Date can not be null")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @FutureOrPresent(message = "Date cannot be in the past")
     public LocalDate getDueDate() {
         return dueDate;

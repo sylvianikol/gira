@@ -1,5 +1,6 @@
 package com.exam.gira.web;
 
+import com.exam.gira.model.service.TaskServiceModel;
 import com.exam.gira.service.TaskService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
@@ -28,6 +30,8 @@ public class HomeController {
         if (httpSession.getAttribute("user") == null) {
             return "index";
         }
+
+        List<TaskServiceModel> tasks = this.taskService.getAllTasks();
         return "home";
     }
 }

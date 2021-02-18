@@ -12,6 +12,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class TaskServiceImpl implements TaskService {
 
@@ -42,5 +45,12 @@ public class TaskServiceImpl implements TaskService {
         }
 
         return true;
+    }
+
+    @Override
+    public List<TaskServiceModel> getAllTasks() {
+        return this.taskRepository.findAll().stream()
+                .map(t -> this.modelMapper.map(t, TaskServiceModel.class))
+                .collect(Collectors.toUnmodifiableList());
     }
 }

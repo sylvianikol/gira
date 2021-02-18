@@ -28,7 +28,6 @@ public class HomeController {
         if (httpSession.getAttribute("user") == null) {
             return "index";
         }
-
         return "home";
     }
 }

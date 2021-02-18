@@ -1,6 +1,7 @@
 package com.exam.gira.web;
 
 import com.exam.gira.model.binding.UserRegisterBindingModel;
+import com.exam.gira.model.service.UserServiceModel;
 import com.exam.gira.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

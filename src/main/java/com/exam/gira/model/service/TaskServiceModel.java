@@ -1,6 +1,6 @@
 package com.exam.gira.model.service;
 
-import com.exam.gira.model.enums.ClassificaionName;
+import com.exam.gira.model.enums.ClassificationName;
 import com.exam.gira.model.enums.Progress;
 
 import java.time.LocalDate;
@@ -11,7 +11,7 @@ public class TaskServiceModel extends BaseServiceModel {
     private String description;
     private Progress progress;
     private LocalDate dueDate;
-    private ClassificaionName classification;
+    private ClassificationName classification;
     private UserServiceModel user;
 
     public TaskServiceModel() {
@@ -49,11 +49,11 @@ public class TaskServiceModel extends BaseServiceModel {
         this.dueDate = dueDate;
     }
 
-    public ClassificaionName getClassification() {
+    public ClassificationName getClassification() {
         return classification;
     }
 
-    public void setClassification(ClassificaionName classification) {
+    public void setClassification(ClassificationName classification) {
         this.classification = classification;
     }
 

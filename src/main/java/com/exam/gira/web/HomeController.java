@@ -1,6 +1,7 @@
 package com.exam.gira.web;
 
 import com.exam.gira.model.service.TaskServiceModel;
+import com.exam.gira.model.view.TaskViewModel;
 import com.exam.gira.service.TaskService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,12 @@ public class HomeController {
             return "index";
         }
 
-        List<TaskServiceModel> tasks = this.taskService.getAllTasks();
+        List<TaskViewModel> tasks = this.taskService.getAllTasks().stream()
+                .map(t -> this.modelMapper.map(t, TaskViewModel.class))
+                .collect(Collectors.toUnmodifiableList());
+
+        model.addAttribute("tasks", tasks);
+
         return "home";
     }
 }

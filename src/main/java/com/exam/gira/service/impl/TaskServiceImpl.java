@@ -1,7 +1,6 @@
 package com.exam.gira.service.impl;
 
 import com.exam.gira.model.entity.Task;
-import com.exam.gira.model.entity.User;
 import com.exam.gira.model.enums.Progress;
 import com.exam.gira.model.service.TaskServiceModel;
 import com.exam.gira.repository.TaskRepository;
@@ -49,8 +48,13 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<TaskServiceModel> getAllTasks() {
+
         return this.taskRepository.findAll().stream()
-                .map(t -> this.modelMapper.map(t, TaskServiceModel.class))
+                .map(t -> {
+                    TaskServiceModel taskServiceModel = this.modelMapper.map(t, TaskServiceModel.class);
+                    taskServiceModel.setClassification(t.getClassification().getName());
+                    return taskServiceModel;
+                })
                 .collect(Collectors.toUnmodifiableList());
     }
 }

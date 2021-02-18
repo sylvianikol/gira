@@ -1,6 +1,6 @@
 package com.exam.gira.model.binding;
 
-import com.exam.gira.model.enums.ClassificaionName;
+import com.exam.gira.model.enums.ClassificationName;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.FutureOrPresent;
@@ -14,7 +14,7 @@ public class TaskAddBindingModel {
     private String name;
     private String description;
     private LocalDate dueDate;
-    private ClassificaionName classification;
+    private ClassificationName classification;
 
     public TaskAddBindingModel() {
     }
@@ -50,12 +50,12 @@ public class TaskAddBindingModel {
         this.dueDate = dueDate;
     }
 
-    @NotNull(message = "Classificaion can not be null")
-    public ClassificaionName getClassification() {
+    @NotNull(message = "Classification can not be null")
+    public ClassificationName getClassification() {
         return classification;
     }
 
-    public void setClassification(ClassificaionName classification) {
+    public void setClassification(ClassificationName classification) {
         this.classification = classification;
     }
 }

@@ -1,5 +1,5 @@
 package com.exam.gira.model.enums;
 
-public enum ClassificaionName {
+public enum ClassificationName {
     BUG, FEATURE, SUPPORT, OTHER
 }

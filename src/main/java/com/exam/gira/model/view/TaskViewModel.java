@@ -1,6 +1,6 @@
 package com.exam.gira.model.view;
 
-import com.exam.gira.model.enums.ClassificaionName;
+import com.exam.gira.model.enums.ClassificationName;
 import com.exam.gira.model.enums.Progress;
 
 import java.time.LocalDate;
@@ -9,7 +9,7 @@ public class TaskViewModel {
 
     private String name;
     private String userName;
-    private ClassificaionName classificaion;
+    private ClassificationName classification;
     private LocalDate dueDate;
     private Progress progress;
 
@@ -32,12 +32,12 @@ public class TaskViewModel {
         this.userName = userName;
     }
 
-    public ClassificaionName getClassificaion() {
-        return classificaion;
+    public ClassificationName getClassification() {
+        return classification;
     }
 
-    public void setClassificaion(ClassificaionName classificaion) {
-        this.classificaion = classificaion;
+    public void setClassification(ClassificationName classification) {
+        this.classification = classification;
     }
 
     public LocalDate getDueDate() {

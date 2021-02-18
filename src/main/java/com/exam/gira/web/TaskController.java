@@ -50,7 +50,7 @@ public class TaskController {
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes,
                              HttpSession httpSession) {
-        System.out.println();
+
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("taskAddBindingModel", taskAddBindingModel);
             redirectAttributes.addFlashAttribute(
@@ -59,7 +59,7 @@ public class TaskController {
 
             return "redirect:add";
         }
-        Object user = httpSession.getAttribute("user");
+
         boolean isAdded = this.taskService.add(
                 this.modelMapper.map(taskAddBindingModel, TaskServiceModel.class),
                 ((UserServiceModel) httpSession.getAttribute("user")).getId());

@@ -41,7 +41,7 @@
                 </div>
                 <select th:field="*{classification}" th:errorclass="bg-danger" type="text" class="form-control" id="classification" name="classification">
                     <option value="">Select Classification</option>
-                    <option th:each="c : ${T(com.exam.gira.model.enums.ClassificaionName).values()}"
+                    <option th:each="c : ${T(com.exam.gira.model.enums.ClassificationName).values()}"
                             th:text="${c}" th:value="${c}">Classification Name</option>
                 </select>
                 <small th:if="${#fields.hasErrors('classification')}" th:errors="*{classification}" class="text-danger">Classification error message</small>

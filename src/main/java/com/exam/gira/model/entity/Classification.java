@@ -1,6 +1,6 @@
 package com.exam.gira.model.entity;
 
-import com.exam.gira.model.enums.ClassificaionName;
+import com.exam.gira.model.enums.ClassificationName;
 
 import javax.persistence.*;
 
@@ -8,18 +8,18 @@ import javax.persistence.*;
 @Table(name = "classifications")
 public class Classification extends BaseEntity {
 
-    private ClassificaionName name;
+    private ClassificationName name;
     private String description;
 
     public Classification() {
     }
 
     @Enumerated(value = EnumType.STRING)
-    public ClassificaionName getName() {
+    public ClassificationName getName() {
         return name;
     }
 
-    public void setName(ClassificaionName name) {
+    public void setName(ClassificationName name) {
         this.name = name;
     }
 

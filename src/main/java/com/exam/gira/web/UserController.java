@@ -1,5 +1,6 @@
 package com.exam.gira.web;
 
+import com.exam.gira.model.binding.UserLoginBindingModel;
 import com.exam.gira.model.binding.UserRegisterBindingModel;
 import com.exam.gira.model.service.UserServiceModel;
 import com.exam.gira.service.UserService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -61,5 +63,44 @@ public class UserController {
         }
 
         return "redirect:login";
+    }
+
+    @GetMapping("/login")
+    public String login(Model model) {
+        if (!model.containsAttribute("userLoginBindingModel")) {
+            model.addAttribute("userLoginBindingModel", new UserLoginBindingModel());
+            model.addAttribute("notFound", false);
+        }
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String loginConfirm(@Valid UserLoginBindingModel userLoginBindingModel,
+                               BindingResult bindingResult,
+                               RedirectAttributes redirectAttributes,
+                               HttpSession httpSession) {
+        System.out.println();
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
+            redirectAttributes.addFlashAttribute(
+                    "org.springframework.validation.BindingResult.userLoginBindingModel",
+                    bindingResult);
+
+            return "redirect:login";
+        }
+
+        UserServiceModel userServiceModel = this.userService.findByEmailAndPassword(
+                userLoginBindingModel.getEmail(),
+                userLoginBindingModel.getPassword());
+
+        if (userServiceModel == null) {
+            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
+            redirectAttributes.addFlashAttribute("notFound", true);
+            return "redirect:login";
+        }
+
+        httpSession.setAttribute("user", userServiceModel);
+
+        return "redirect:/";
     }
 }

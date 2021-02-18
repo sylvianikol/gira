@@ -75,8 +75,14 @@ public class TaskController {
         return "redirect:/";
     }
 
-    @PostMapping("/update/{id}")
+    @GetMapping("/update/{id}")
     public String update(@PathVariable Long id) {
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateConfirm(@PathVariable Long id) {
         this.taskService.updateTask(id);
         return "redirect:/";
     }
